@@ -1,0 +1,31 @@
+nvm install 8.9.3
+nvm use 8.9.3
+node -v
+---------------------------------
+cd 路徑\到\marlin-config
+rd /s /q node_modules
+del package-lock.json  2>nul
+
+npm install
+---------------------------------
+:: 安裝舊版 electron-rebuild（避免 lzma-native 不相容）
+npm install -D electron-rebuild@1.10.1
+
+:: 針對 Electron 2.0.1 重建 serialport
+npx electron-rebuild -v 2.0.1 -f -w serialport
+---------------------------------
+npm start
+---------------------------------
+---------------------------------
+---------------------------------
+---------------------------------
+
+
+build
+---------------------------------
+nvm use 8.9.3   :: 安裝階段還是用 Node 8
+npm install bufferutil@3.0.5 utf-8-validate@4.0.2 --save
+npx electron-rebuild -v 2.0.1 -f -w serialport -w bufferutil -w utf-8-validate
+---------------------------------
+nvm use 12.22.12
+npm run build 
